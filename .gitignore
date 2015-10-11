@@ -6,3 +6,4 @@
 **/.divshot-cache
 **/Guardfile
 **/config.rb
+**/npm-debug.log
