@@ -182,7 +182,7 @@ var Controller = React.createClass({
             <div id="info" className="header-area">
               <button className="toggle" aria-label="Aktiver informasjon" onClick={this.toggle.bind(this, 'info')}>Info</button>
                 <div id="infobox" className={infoboxVisibility}>
-                  <p className="description">BT Vin er en platform som viser vinanmeldelser publisert på BT.no</p>
+                  <p className="description">BT Vin er en webapp som viser vinanmeldelser publisert på BT.no</p>
                   
                   <div className="small">
                     <p>Et prosjekt av <a target="_blank" href="https://twitter.com/joekimt">Joakim Tønnesen</a></p>

@@ -6,7 +6,7 @@ The app is hosted at http://bt-vin.divshot.io/
 
 
 ## Development
-This app runs on React.
+This app runs on React https://facebook.github.io/react/
 
 App code is located in this file: app/jsx/WineReviews.jsx
 
