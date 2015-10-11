@@ -1,0 +1,8 @@
+**/node_modules/*
+**/.DS_Store
+**/.sass-cache
+**/divshot.json
+**/error.html
+**/.divshot-cache
+**/Guardfile
+**/config.rb

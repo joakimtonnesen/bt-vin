@@ -1,0 +1,606 @@
+// Define colors
+$purple100: #71153F;
+$purple120: #5D1336;
+$purple140: #52112F;
+
+$green80: #A6C88E;
+$green100: #45C067;
+$green120: #008000;
+
+$red100: #CC2B55;
+$yellow100: #E5DA4C;
+$blue100: #4FD1FF;
+
+$gray20: #f3f3f3;
+$gray40: #838383;
+$gray80: #666;
+
+// Define typography
+$serif: Georgia, 'Times New Roman', times;
+$sans: 'Lucida Grande', helvetica, arial, sans-serif; 
+
+$h2: 26px;
+$p: 15px;
+$small: 12px;
+
+// Typography
+a {
+  color: #fff;
+  text-decoration: none;
+}
+p {
+  font-family: $sans;
+}
+h1, h2, h3 {
+  font-weight: normal;
+  font-family: $serif;
+  font-size: $h2;
+  line-height: 1em;
+}
+
+
+body {
+  font-family: $serif;
+  background-color: $purple100;
+  color: #fff;
+  margin: 0;
+}
+
+#wine-review-app {
+  padding: 0;
+  overflow: hidden;
+  #overlay {
+    background-color: #000;
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+    top: -1000px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity .2s;
+    &.visible {
+      opacity: .9;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+    }
+  }
+  header#app-header {
+    position: relative;
+    z-index: 3;
+    height: 48px;
+    padding: 20px 0;
+    .header-inner {
+      width: 500px;
+      margin: 0 auto;
+    }
+    .header-area {
+      position: relative;
+      float: left;
+      height: auto;
+      width: 100px;
+      &#info {
+        float: right;
+      }
+      button.toggle {
+        border: none;
+        position: relative;
+        background: transparent;
+        color: #fff;
+        height: 48px;
+        float: left;
+        padding: 0 35px 0 20px;
+        text-transform: uppercase;
+        font-size: $small;
+        line-height: 1em;
+        &:after {
+          transform: rotate(-90deg) scale(1,1.4);
+          -webkit-transform: rotate(-90deg) scale(1,1.4);
+          -ms-transform: rotate(-90deg) scale(1,1.4);
+          font-family: $serif;
+          content: "<";
+          width: 12px;
+          height: 16px;
+          position: absolute;
+          right: 12px;
+          top: 50%;
+          margin-top: -8px;
+          color: #fff;
+        }
+        &:hover {
+          color: $green100;
+        }
+        &:focus {
+          color: #fff;
+          outline: none;
+        }
+      }
+      div#infobox {
+        position: absolute;
+        display: none;
+        top: 68px;
+        width: 300px;
+        left: 20px;
+        h2 {
+          margin: 0;
+          padding: 0;
+        }
+        p.description {
+          font-size: $p;
+          margin-top: 0;
+        }
+        div.small {
+          padding: 4px 10px;
+          margin: 0 0 0 10px;
+          border-left: 1px solid #fff;
+          p {
+            font-size: $small;
+            a {
+              color: $green100;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        &.visible {
+          display: block;
+        }
+      }
+      nav#sort-menu {
+        display: none;
+        position: absolute;
+        width: 200px;
+        top: 68px;
+        right: 0;
+        &.sorting-by-price {
+          ul li button.sort-by-price {
+            &:after {
+              display: block;
+            }
+          }
+        }
+        &.sorting-by-score {
+          ul li button.sort-by-score {
+            &:after {
+              display: block;
+            }
+          }
+        }
+        &.ordering-by-asc {
+          ul li button:after {
+            background-position: 0 0;
+          }
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          li {
+            display: block;
+            button {
+              text-align: right;
+              text-transform: uppercase;
+              background: transparent;
+              width: 100%;
+              padding: 10px;
+              border: none;
+              color: #fff;
+              position: relative;
+              &:after {
+                display: none;
+                background-image: url(../img/order-icon.png);
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: 0 -6px;
+                content: "";
+                width: 8px;
+                height: 6px;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                margin-top: -3px;
+              }
+              &:hover {
+                color: $green100;
+              }
+            }
+          }
+        }
+        &.visible {
+          display: block;
+        }
+      }
+    }
+    #bt-vin-logo {
+      width: 150px;
+      height: 48px;
+      margin: 0;
+      position: absolute;
+      left: 50%;
+      margin-left: -70px;
+      span, h1 {
+        float: left;
+        &.logo {
+          display: block;
+          background-repeat: no-repeat;
+          background-image: url('../img/bt-logo.png');
+          background-size: 100%;
+          width: 80px;
+          height: 47px;
+        }
+        &.text {
+          margin: 0;
+          padding: 0;
+          font-size: 32px;
+          line-height: 1em;
+          color: $green100;
+          position: relative;
+          top: 50%;
+          float: right;
+          margin-top: -17px;
+        }
+      }
+    }
+  } // /#app-header
+  .app-inner {
+    height: 100%;
+    min-height: 150px;
+    background-image: url('../img/loading.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    padding: 0 0 100px 0;
+    position: relative;
+    &.loading-done {
+      background-image: none;
+      #controller {
+        display: block;
+      }
+    }
+    #controller {
+      display: none;
+      #load-more {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        button {
+          font-size: $p;
+          text-transform: uppercase;
+          font-weight: bold;
+          border: none;
+          padding: 10px 20px;
+          display: block;
+          width: 200px;
+          margin: 0 auto;
+          border-bottom: 4px solid $purple120;
+        }
+      }
+    }
+  }
+  .reviews-inner {
+    position: relative;
+    left: 1%;
+  }
+}
+
+.review {
+  padding: 30px 0 0 0;
+  width: 32%;
+  height: 390px;
+  margin: 0 1% 0 0;
+  float: left;
+  &:hover {
+    header {
+      background-color: #fff;
+      border-color: $purple100;
+      blockquote {
+        color: #000;
+        &:before {
+          color: $green120;
+        }
+      }
+      .rating, .price {
+        opacity: 1;
+      }
+    }
+    footer {
+      border-color: $purple140;
+      background-color: $green100;
+      .image-wrapper {
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &.hidden {
+    display: none;
+  }
+  header {
+    position: relative;
+    padding: 22px 30px 30px 10px;
+    margin: 0 0 8px 0;
+    background-color: $gray20;
+    .rating {
+      position: absolute;
+      width: 120px;
+      height: 20px;
+      top: -25px;
+      left: 10px;
+      opacity: .85;
+      .star {
+        float: left;
+        width: 15px;
+        height: 15px;
+        background-image:url('../img/bt-vin-sprites.png');
+        background-size: 100%;
+        margin: 0 4px 0 0;
+        &.faded {
+          background-position: 0 -15px;
+        }
+      }
+    }
+    .price {
+      position: absolute;
+      top: -27px;
+      right: 10px;
+      text-align: right;
+      opacity: .85;
+    }
+    blockquote {
+      color: $gray80;
+      margin: 0;
+      font-size: $p;
+      padding-left: 40px;
+      position: relative;
+      &:before {
+        content: "“";
+        font-size: 72px;
+        font-family: $serif;
+        color: $gray80;
+        position: absolute;
+        left: 0;
+        top: -5px;
+        height: 20px;
+        width: 20px;
+      }
+      p {
+        margin: 0;
+        line-height: 1.4em;
+      }
+    }
+  }
+  footer {
+    position: relative;
+    padding: 10px;
+    background-color: $gray40;
+    border-bottom: 8px solid $purple120;
+    .image-wrapper {
+      float: left;
+      width: 29%;
+      height: 75px;
+      overflow: hidden;
+      background-color: #fff;
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        &:focus {
+          img {
+            opacity: .5;
+          }
+          background-color: #00C6FF;
+        }
+        img {
+          position: relative;
+          left: -22px;
+          top: -200%;
+          opacity: .75;
+        }
+      }  
+    }
+    .name-wrapper {
+      float: left;
+      width: 65%;
+      display: table;
+      height: 75px;
+      margin-left: 15px;
+      h2 {
+        display: table-cell;
+        vertical-align: middle;
+        color: #fff;
+        margin: 0 0 4px 0;
+        font-size: $h2;
+      }
+      span.date {
+        color: #333;
+        text-transform: uppercase;
+        font-family: $sans;
+        font-size: $small;
+      }
+    }
+    span.external-links {
+      position: absolute;
+      text-align: center;
+      bottom: -35px;
+      width: 100%;
+      left: 0;
+      font-family: $sans;
+      a {
+        margin: 0 10px;
+        color: #fff;
+        font-size: 16px;
+        &:hover {
+          text-decoration: underline;
+        } 
+      }
+    }
+  }
+}
+
+button {
+  background-color: $green100;
+  color: #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  font-size: $small;
+  border: none;
+  &:focus, &:hover {
+    background-color: $red100;
+    outline: none;
+  }
+  &:active {
+    background-color: $yellow100;
+    color: #000;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.sr-only {
+  display: none;
+}
+@media(speech) {
+  .sr-only {
+    display: block;
+  }
+  .hidden-sr {
+    display: none;
+  }
+}
+
+@media(min-width: 1440px) {
+  #wine-review-app {
+    width: 1440px;
+    margin: 0 auto;
+  }
+}
+@media(max-width: 1439px) {
+  .review {
+    height: 475px;
+  }
+}
+
+@media(max-width: 1139px) {
+  .review {
+    width: 48%;
+    margin: 0 2% 0 0;
+  }
+}
+
+@media(max-width: 939px) {
+  #wine-review-app header#app-header .header-area div#infobox {
+    left: -120px;
+  }
+}
+
+@media(max-width: 769px) {
+  #wine-review-app {
+    .reviews-inner {
+      padding: 0 20px;
+      left: 0;
+    }
+  }
+  .review {
+    width: 100%;
+    margin: 0;
+    height: auto;
+    margin-bottom: 170px;
+    &.two {
+      margin-bottom: 170 + 68px;
+    }
+    header {
+      background-color: #fff;
+      border-color: $purple100;
+      blockquote {
+        color: #000;
+        &:before {
+          color: $green120;
+        }
+      }
+      .rating, .price {
+        opacity: 1;
+      }
+    }
+    footer {
+      border-color: $purple140;
+      background-color: $green100;
+      .image-wrapper {
+        img {
+          opacity: 1;
+        }
+      }
+      span.external-links {
+        height: auto;
+        display: block;
+        bottom: -86px;
+        &.two {
+          bottom: -154px;
+        }
+        a {
+          margin: 0 0 10px 0;
+          padding: 20px 0;
+          display: block;
+          background-color: $purple120;
+          &:focus, &:hover {
+            text-decoration: none;
+            background-color: $red100;
+          }
+          &:active {
+            background-color: $yellow100;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 647px) {
+  .review footer .name-wrapper h2 {
+    font-size: 20px;
+  }
+  #wine-review-app header#app-header {
+    height: 140px;
+  }
+  #wine-review-app header#app-header .header-area {
+    top: 86px;
+    position: absolute;
+    &#sort {
+      left: 10px;
+    }
+    &#info {
+      right: 10px;
+    }
+  }
+  #wine-review-app header#app-header .header-area nav#sort-menu {
+    left: 5%;
+    width: 90%;
+    position: fixed;
+    top: 135px;
+    ul li button {
+      background-color: rgba(0,0,0,.4);
+      padding: 12px;
+      border: 1px solid #fff;
+      margin: 0 0 8px 0;
+      text-align: center;
+      &:after {
+        right: 50%;
+        margin-right: -36px;
+      }
+    }
+  }
+  #wine-review-app header#app-header .header-area div#infobox {
+    left: 5%;
+    position: fixed;
+    width: 90%;
+    top: 250px;
+  }
+}
