@@ -8,10 +8,14 @@ The app is hosted at http://bt-vin.divshot.io/
 ## Development
 
 ### Install npm modules
-``` npm install
+```
+npm install
+```
 
 ### Watch and compile jsx
-``` npm run watch
+```
+npm run watch
+```
 
 ## Known bugs:
 
