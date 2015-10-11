@@ -1,5 +1,6 @@
 // REACT AND PLUGINS
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var classNames = require('classnames');
 
 // WINE REVIEWS COMPONENT
@@ -403,5 +404,5 @@ var Rating = React.createClass({
 
 var wrapper = document.getElementById('wine-review-app');
 if(wrapper !== null) {
-  React.render(<WineReviews />, wrapper);
+  ReactDOM.render(<WineReviews />, wrapper);
 }

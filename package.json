@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "classnames": "^2.1.5",
-    "react": "^0.14.0"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
     "babelify": "^6.3.0",

@@ -51,6 +51,7 @@ body {
   overflow: hidden;
   #overlay {
     background-color: #000;
+    background: linear-gradient(to bottom, #2f0a1c 0%,#000 50%);;
     opacity: 0;
     position: fixed;
     z-index: 2;
@@ -60,7 +61,7 @@ body {
     width: 100%;
     transition: opacity .2s;
     &.visible {
-      opacity: .9;
+      opacity: .93;
       top: 0;
       bottom: 0;
       height: 100%;
